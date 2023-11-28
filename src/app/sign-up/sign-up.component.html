@@ -1,0 +1,160 @@
+<div class="signup-form">
+  <h2>Sign Up</h2>
+  <form [formGroup]="myFormGroup" (ngSubmit)="signUp()">
+    <div class="form-group">
+      <label for="username"
+        >Username
+        <span
+          style="color: red"
+          *ngIf="
+            isFieldInvalid('username') &&
+            myFormGroup.controls['username'].touched
+          "
+        >
+          *</span
+        ></label
+      >
+      <input
+        type="text"
+        id="username"
+        name="username"
+        formControlName="username"
+        required
+      />
+      <div
+        *ngIf="
+          isFieldInvalid('username') && myFormGroup.controls['username'].touched
+        "
+      >
+        <i
+          style="color: red"
+          *ngIf="myFormGroup.controls['username'].hasError('required')"
+        >
+          Username is required
+        </i>
+        <i
+          style="color: red"
+          *ngIf="
+            myFormGroup.controls['username'].hasError('minlength') &&
+            myFormGroup.controls['username'].dirty
+          "
+          >Username must be at least 2 characters long</i
+        >
+        <i
+          style="color: red"
+          *ngIf="
+            myFormGroup.controls['username'].hasError('maxlength') &&
+            myFormGroup.controls['username'].dirty
+          "
+          >Username must be at most 18 characters long</i
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email"
+        >Email
+        <span
+          style="color: red"
+          *ngIf="
+            isFieldInvalid('email') &&
+            !myFormGroup.controls['email'].hasError('required') &&
+            !myFormGroup.controls['email'].hasError('pattern')
+          "
+        >
+          *</span
+        ></label
+      >
+      <input
+        type="email"
+        id="email"
+        name="email"
+        formControlName="email"
+        required
+      />
+      <div *ngIf="isFieldInvalid('email')">
+        <i
+          style="color: red"
+          *ngIf="myFormGroup.controls['email'].hasError('required')"
+        >
+          Email is required
+        </i>
+        <i
+          style="color: red"
+          *ngIf="myFormGroup.controls['email'].hasError('pattern')"
+        >
+          Email must not start with a number or special character
+        </i>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password"
+        >Password
+        <span
+          style="color: red"
+          *ngIf="
+            isFieldInvalid('password') &&
+            myFormGroup.controls['password'].touched
+          "
+        >
+          *</span
+        ></label
+      >
+      <input
+        type="password"
+        id="password"
+        name="password"
+        formControlName="password"
+        required
+      />
+      <div
+        *ngIf="
+          isFieldInvalid('password') && myFormGroup.controls['password'].touched
+        "
+      >
+        <i
+          style="color: red"
+          *ngIf="myFormGroup.controls['password'].hasError('required')"
+        >
+          Password is required
+        </i>
+        <i
+          style="color: red"
+          *ngIf="
+            myFormGroup.controls['password'].hasError('minlength') &&
+            myFormGroup.controls['password'].dirty
+          "
+        >
+          Password must be 8 characters long
+        </i>
+        <i
+          style="color: red"
+          *ngIf="
+            myFormGroup.controls['password'].hasError('pattern') &&
+            myFormGroup.controls['password'].dirty
+          "
+        >
+          Password must contain at least 1 special character, 1 number, and 1
+          uppercase letter
+        </i>
+      </div>
+    </div>
+    <button
+      type="submit"
+      [style.opacity]="myFormGroup.invalid ? '0.5' : '1'"
+      [disabled]="myFormGroup.invalid"
+    >
+      Sign Up
+    </button>
+  </form>
+  <h5 class="container mt-3">Already have an account?</h5>
+  <button class="mt-2" routerLink="/login">Login</button>
+</div>
+
+<!-- modal -->
+<div *ngIf="showModal" class="modal">
+  <div class="modal-content">
+    <h2>{{ modalTitle }}</h2>
+    <p>{{ modalMessage }}</p>
+    <button (click)="closeModal()">Close</button>
+  </div>
+</div>

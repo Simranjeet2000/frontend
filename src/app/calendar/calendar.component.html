@@ -1,0 +1,45 @@
+<div class="container">
+  <full-calendar [options]="calendarOptions"></full-calendar>
+  <button class="button" id="authorize_button" (click)="handleAuthClick()">Sync</button>
+  <button class="button" id="signout_button" (click)="handleSignoutClick()">Syncout</button>
+</div>
+
+
+
+<!-- Show Detail Modal -->
+<div *ngIf="selectedEvent" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h2>{{ selectedEvent.title }}</h2>
+    <p><strong>Start:</strong> {{ selectedEvent.start }}</p>
+    <p><strong>End:</strong> {{ selectedEvent.end }}</p>
+    <button (click)="openEditForm()">Edit</button>
+    <button (click)="removeEvent()">Remove</button>
+  </div>
+</div>
+
+<!-- Add Event Modal -->
+<div *ngIf="isAddEventFormOpen" class="modal2">
+  <div class="modal-content2">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <!-- Add Event Form -->
+    <h2>{{ selectedEvent ? 'Edit Event' : 'Add Event' }}</h2>
+    <label for="eventTitle">Title:</label>
+    <input type="text" id="eventTitle" [(ngModel)]="newEvent.title" required>
+
+    <label for="eventStart">Start Date and Time:</label>
+    <input
+      type="datetime-local"
+      id="eventStart"
+      [(ngModel)]="newEvent.start"
+      required
+    >
+
+    <label for="eventEnd">End Date and Time:</label>
+    <input type="datetime-local" id="eventEnd" [(ngModel)]="newEvent.end" required>
+
+    <button (click)="selectedEvent ? updateEvent() : addEvent()">
+      {{ selectedEvent ? 'Update Event' : 'Add Event' }}
+    </button>
+  </div>
+</div>

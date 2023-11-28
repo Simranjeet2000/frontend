@@ -1,0 +1,16 @@
+<div class="topbar">
+  <img src="../../assets/images/joenish.png" alt="logo">
+  <p>Welcome... {{ username }}</p>
+</div>
+<div class="sidebar-left">
+  <button (click)="logout()">Logout</button>
+  <!-- <button (click)="showCalendar()" *ngIf="!displayCalendar">Schedule</button> -->
+  <!-- <button (click)="hideCalendar()" *ngIf="displayCalendar">Cancel</button> -->
+</div>
+<div class="main-content">
+  <div>
+    <app-calendar></app-calendar>
+  </div>
+</div>
+<div class="sidebar-right">
+</div>
